@@ -26,14 +26,14 @@ def loadSource(source_file):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
-    parser.add_argument("--source", type=str, default="data/videos/road.mp4", help="Video")
-    parser.add_argument("--names", type=str, default="data/class.names", help="Object Names")
-    parser.add_argument("--model", type=str, default="yolov8n.onnx", help="Pretrained Model")
-    parser.add_argument("--tresh", type=float, default=0.25, help="Confidence Threshold")
-    parser.add_argument("--thickness", type=int, default=2, help="Line Thickness on Bounding Boxes")
+    parser.add_argument("--source", type=str, default="data/videos/road.mp4", help="Video") #test olarak kullanilacak olarak gorntu.
+    parser.add_argument("--names", type=str, default="data/class.names", help="Object Names") #names'lerin nerede old. ifade ediyor.
+    parser.add_argument("--model", type=str, default="yolov8n.onnx", help="Pretrained Model") #ai modelinimizin nerede old. ifade ediyor.
+    parser.add_argument("--tresh", type=float, default=0.25, help="Confidence Threshold") #guven skoru buradada %25in alti kabul edilmedigi belirtilmis.
+    parser.add_argument("--thickness", type=int, default=2, help="Line Thickness on Bounding Boxes") #nesne tespitindeki dikdortgen kalinligi.
     args = parser.parse_args()    
 
-    model = cv2.dnn.readNet(args.model)
+    model = cv2.dnn.readNet(args.model) #opencv'nin dnn modeli kullanilmis. modeli okumamizi sagliyor.
 
     IMAGE_SIZE = 640
     NAMES = []
@@ -54,7 +54,7 @@ if __name__ == '__main__':
 
         image = frame.copy()
     
-        blob = cv2.dnn.blobFromImage(image, 1/255.0, (IMAGE_SIZE, IMAGE_SIZE), swapRB=True, crop=False)
+        blob = cv2.dnn.blobFromImage(image, 1/255.0, (IMAGE_SIZE, IMAGE_SIZE), swapRB=True, crop=False) #elimizdeki resmi 4 boyutlu bi tensor'a ceviriyor. 
         class_ids, confs, boxes = list(), list(), list()
 
         model.setInput(blob)
